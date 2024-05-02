@@ -92,7 +92,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_j4y03")
 }],
-"loop": true,
+"loop": false,
 "name": &"DoubleJumpStart",
 "speed": 24.0
 }, {
@@ -220,7 +220,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("42_f4dci")
 }],
-"loop": true,
+"loop": false,
 "name": &"JumpStart",
 "speed": 24.0
 }, {
@@ -305,6 +305,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerSprite")]
 script = ExtResource("1_vh4pi")
 playerSprite = NodePath("AnimatedSprite2D")
+maxJumps = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -28)
@@ -314,5 +315,7 @@ shape = SubResource("RectangleShape2D_v7l27")
 position = Vector2(0, -30)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_pigcf")
-animation = &"Idle"
+animation = &"DoubleJumpStart"
 autoplay = "Idle"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
