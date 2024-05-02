@@ -1,3 +1,4 @@
 res://Levels/Level01.tscn
 res://Player/Player.tscn
 res://Scripts/Player.gd
+res://Player/PlayerCamera.tscn

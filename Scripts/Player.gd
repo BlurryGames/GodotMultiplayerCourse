@@ -1,5 +1,8 @@
 class_name Player extends CharacterBody2D
 
+@export var playerCamera: PackedScene = null
+@export var cameraHeight: float = -132.0
+
 @export var playerSprite: AnimatedSprite2D = null
 
 @export var movementSpeed: float = 300.0
@@ -10,6 +13,15 @@ class_name Player extends CharacterBody2D
 @onready var initialSpriteScale: Vector2 = playerSprite.scale
 
 var jumpCount: int = 0
+var cameraInstance: Camera2D = null
+
+func _ready()-> void:
+	cameraInstance = playerCamera.instantiate()
+	cameraInstance.global_position.y = cameraHeight
+	get_tree().current_scene.add_child.call_deferred(cameraInstance)
+
+func _process(_delta)-> void:
+	cameraInstance.global_position.x = global_position.x
 
 func _physics_process(_delta: float)-> void:
 	var horizontalInput: float = (

@@ -1,8 +1,9 @@
-[gd_scene load_steps=70 format=3 uid="uid://ck0an6lmghw31"]
+[gd_scene load_steps=71 format=3 uid="uid://ck0an6lmghw31"]
 
 [ext_resource type="Texture2D" uid="uid://cln1ubxiy43oh" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_000.png" id="1_gw4ld"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_vh4pi"]
 [ext_resource type="Texture2D" uid="uid://n7mnms3u3wjr" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_001.png" id="2_l2trn"]
+[ext_resource type="PackedScene" uid="uid://bosxi3qg7xk7x" path="res://Player/PlayerCamera.tscn" id="2_oyvu6"]
 [ext_resource type="Texture2D" uid="uid://k2rlkgmf0qqf" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_002.png" id="3_lxrbv"]
 [ext_resource type="Texture2D" uid="uid://cxmvprctwqect" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_003.png" id="4_uwvqq"]
 [ext_resource type="Texture2D" uid="uid://bn4vyw1tvbcfy" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_004.png" id="5_uefg6"]
@@ -304,6 +305,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerSprite")]
 script = ExtResource("1_vh4pi")
+playerCamera = ExtResource("2_oyvu6")
 playerSprite = NodePath("AnimatedSprite2D")
 maxJumps = 3
 
