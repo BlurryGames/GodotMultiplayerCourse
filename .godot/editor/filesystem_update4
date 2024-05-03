@@ -2,3 +2,5 @@ res://Levels/Menu/Menu.tscn
 res://Levels/Level01/Level01.tscn
 res://Player/Player.tscn
 res://Player/PlayerCamera.tscn
+res://Scripts/Menu.gd
+res://Scripts/Lobby.gd

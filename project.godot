@@ -15,6 +15,10 @@ run/main_scene="res://Levels/Menu/Menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LobbyPtr="*res://Scripts/Lobby.gd"
+
 [display]
 
 window/size/resizable=false
@@ -22,6 +26,7 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
+"res://Scripts/": "gray",
 "res://art/": "pink",
 "res://art/backgrounds/": "green",
 "res://art/characters/": "red",
