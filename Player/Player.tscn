@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://ck0an6lmghw31"]
+[gd_scene load_steps=72 format=3 uid="uid://ck0an6lmghw31"]
 
 [ext_resource type="Texture2D" uid="uid://cln1ubxiy43oh" path="res://art/characters/elf/double_jump_start/0_Dark_Elves_Double Jump_000.png" id="1_gw4ld"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_vh4pi"]
@@ -303,6 +303,17 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_15uqu"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("AnimatedSprite2D:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("playerSprite")]
 script = ExtResource("1_vh4pi")
 playerCamera = ExtResource("2_oyvu6")
@@ -319,5 +330,8 @@ scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_pigcf")
 animation = &"DoubleJumpStart"
 autoplay = "Idle"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_15uqu")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

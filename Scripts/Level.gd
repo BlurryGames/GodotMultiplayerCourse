@@ -18,6 +18,9 @@ func _ready()-> void:
 	addPlayer(1)
 
 func _exit_tree()-> void:
+	if not multiplayer.multiplayer_peer:
+		return
+	
 	if not multiplayer.is_server():
 		return
 	

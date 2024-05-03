@@ -12,16 +12,31 @@ class_name Player extends CharacterBody2D
 
 @onready var initialSpriteScale: Vector2 = playerSprite.scale
 
+var ownerID: int = 1
 var jumpCount: int = 0
 var cameraInstance: Camera2D = null
 
-func _ready()-> void:
+func _enter_tree()-> void:
+	ownerID = name.to_int()
+	set_multiplayer_authority(ownerID)
+	if ownerID != multiplayer.get_unique_id():
+		return
+	
 	setUpCamera()
 
 func _process(_delta)-> void:
+	if not multiplayer.multiplayer_peer:
+		return
+	
+	if ownerID != multiplayer.get_unique_id():
+		return
+	
 	updateCameraPosition()
 
 func _physics_process(_delta: float)-> void:
+	if ownerID != multiplayer.get_unique_id():
+		return
+	
 	var horizontalInput: float = (
 		Input.get_action_strength("MoveRight")
 		- Input.get_action_strength("MoveLeft"))
