@@ -27,17 +27,35 @@ func createGame():
 	players[1] = playerInfo
 	playerConnected.emit(1, playerInfo)
 
+func joinGame(adress: String):
+	var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+	var error: Error = peer.create_client(adress, port)
+	if error:
+		return error
+	multiplayer.multiplayer_peer = peer
+
 func onPlayerConnected(id: int)-> void:
-	pass
+	registerPlayer.rpc_id(id, playerInfo)
+
+@rpc("any_peer", "reliable")
+func registerPlayer(newPlayerInfo: Dictionary)-> void:
+	var newPlayerID: int = multiplayer.get_remote_sender_id()
+	players[newPlayerID] = newPlayerInfo
+	playerConnected.emit(newPlayerID, newPlayerInfo)
 
 func onPlayerDisconnected(id: int)-> void:
-	pass
+	players.erase(id)
+	playerDisconnected.emit(id)
 
 func onConnectedToServer()-> void:
-	pass
+	var peerID: int = multiplayer.get_unique_id()
+	players[peerID] = playerInfo
+	playerConnected.emit(peerID, playerInfo)
 
 func onConnectionFailed()-> void:
-	pass
+	multiplayer.multiplayer_peer = null
 
 func onServerDisconnected()-> void:
-	pass
+	multiplayer.multiplayer_peer = null
+	players.clear()
+	serverDisconnected.emit()
