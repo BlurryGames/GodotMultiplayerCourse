@@ -1,3 +1,4 @@
+Node2D
 MultiplayerSpawner
 Node
 Label
@@ -11,5 +12,3 @@ ParallaxBackground
 Camera2D
 AnimatedSprite2D
 CollisionShape2D
-CharacterBody2D
-RigidBody2D

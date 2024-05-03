@@ -4,3 +4,4 @@ res://Player/Player.tscn
 res://Player/PlayerCamera.tscn
 res://Scripts/Menu.gd
 res://Scripts/Lobby.gd
+res://Scripts/Level.gd
