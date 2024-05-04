@@ -5,3 +5,5 @@ res://Player/PlayerCamera.tscn
 res://Levels/Menu/Menu.tscn
 res://Interactables/PressurePlate/PressurePlate.tscn
 res://Scripts/PressurePlate.gd
+res://Interactables/Door/Door.tscn
+res://Scripts/Door.gd
