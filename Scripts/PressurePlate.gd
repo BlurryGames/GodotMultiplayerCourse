@@ -1,5 +1,7 @@
 class_name PressurePlate extends Node2D
 
+signal toggle(state: bool)
+
 @export var isDown = false
 @export var plateUp: Sprite2D = null
 @export var plateDown: Sprite2D = null
@@ -14,6 +16,9 @@ func _on_area_2d_body_entered(_body: CharacterBody2D)-> void:
 	updatePlateState()
 
 func _on_area_2d_body_exited(_body: CharacterBody2D)-> void:
+	if not multiplayer.multiplayer_peer:
+		return
+	
 	if not multiplayer.is_server():
 		return
 	
@@ -25,6 +30,7 @@ func _on_multiplayer_synchronizer_delta_synchronized():
 
 func updatePlateState()-> void:
 	isDown = bodiesOnPlate > 0
+	toggle.emit(isDown)
 	setPlateProperties()
 
 func setPlateProperties()-> void:

@@ -10,7 +10,7 @@ size = Vector2(35, 320)
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75kaa"]
 properties/0/path = NodePath(".:isOpen")
 properties/0/spawn = true
-properties/0/replication_mode = 2
+properties/0/replication_mode = 1
 
 [node name="Door" type="Node2D" node_paths=PackedStringArray("doorOpen", "doorClosed", "collider")]
 script = ExtResource("1_11njv")
