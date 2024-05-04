@@ -15,6 +15,9 @@ class_name Player extends CharacterBody2D
 var ownerID: int = 1
 var jumpCount: int = 0
 var cameraInstance: Camera2D = null
+var state: playerState = playerState.IDLE
+
+enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_JUMPING = 4, FALLING = 5 }
 
 func _enter_tree()-> void:
 	ownerID = name.to_int()
@@ -51,8 +54,9 @@ func _physics_process(_delta: float)-> void:
 	faceMovementDirection(horizontalInput)
 
 
-func _on_animated_sprite_2d_animation_finished():
-	playerSprite.play("Jump")
+func _on_animated_sprite_2d_animation_finished()-> void:
+	if state == playerState.JUMPING:
+		playerSprite.play("Jump")
 
 func faceMovementDirection(horizontalInput: float)-> void:
 	if not is_zero_approx(horizontalInput):
@@ -70,32 +74,41 @@ func updateCameraPosition()-> void:
 	cameraInstance.global_position.x = global_position.x
 
 func handleMovementState()-> void:
-	var isFalling: bool = velocity.y > 0 and not is_on_floor()
-	var isJumping: bool = Input.is_action_just_pressed("Jump") and is_on_floor()
-	var isDoubleJumping: bool = Input.is_action_just_pressed("Jump") and isFalling
-	var isJumpCancelled: bool = Input.is_action_just_released("Jump") and velocity.y < 0.0
-	var isIdle: bool = is_on_floor() and is_zero_approx(velocity.x)
-	var isWalking: bool = is_on_floor() and not is_zero_approx(velocity.x)
+	if Input.is_action_just_pressed("Jump") and is_on_floor():
+		state = playerState.JUMP_STARTED
+	elif is_on_floor() and is_zero_approx(velocity.x):
+		state = playerState.IDLE
+	elif is_on_floor() and not is_zero_approx(velocity.x):
+		state = playerState.WALKING
+	else:
+		state = playerState.JUMPING
 	
-	if isJumping:
-		playerSprite.play("JumpStart")
-	elif isDoubleJumping:
-		playerSprite.play("DoubleJumpStart")
-	elif isWalking:
-		playerSprite.play("Walk")
-	elif isFalling:
-		playerSprite.play("Fall")
-	elif isIdle:
-		playerSprite.play("Idle")
+	if velocity.y > 0 and not is_on_floor():
+		if Input.is_action_just_pressed("Jump"):
+			state = playerState.DOUBLE_JUMPING
+		else:
+			state = playerState.FALLING
 	
-	if isJumping:
-		jumpCount += 1
-		velocity.y = -jumpStrength
-	elif isDoubleJumping:
-		jumpCount += 1
-		if jumpCount <= maxJumps:
+	match state:
+		playerState.IDLE:
+			playerSprite.play("Idle")
+			jumpCount = 0
+		playerState.WALKING:
+			playerSprite.play("Walk")
+			jumpCount = 0
+		playerState.JUMP_STARTED:
+			playerSprite.play("JumpStart")
+			jumpCount += 1
 			velocity.y = -jumpStrength
-	elif isJumpCancelled:
+		playerState.JUMPING:
+			pass
+		playerState.DOUBLE_JUMPING:
+			playerSprite.play("DoubleJumpStart")
+			jumpCount += 1
+			if jumpCount <= maxJumps:
+				velocity.y = -jumpStrength
+		playerState.FALLING:
+			playerSprite.play("Fall")
+	
+	if Input.is_action_just_released("Jump") and velocity.y < 0.0:
 		velocity.y = 0.0
-	elif is_on_floor():
-		jumpCount = 0

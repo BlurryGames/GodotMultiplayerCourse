@@ -1,6 +1,5 @@
-res://Levels/Level01/Level01.tscn
 res://Player/Player.tscn
+res://Scripts/Player.gd
+res://Levels/Level01/Level01.tscn
 res://Player/PlayerCamera.tscn
 res://Levels/Menu/Menu.tscn
-res://Scripts/Player.gd
-res://Scripts/Level.gd
