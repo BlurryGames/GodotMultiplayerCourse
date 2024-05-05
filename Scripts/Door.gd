@@ -5,7 +5,7 @@ class_name Door extends Node2D
 @export var doorClosed: Sprite2D = null
 @export var collider: CollisionShape2D = null
 
-func _on_multiplayer_synchronizer_synchronized():
+func _on_multiplayer_synchronizer_delta_synchronized():
 	setDoorProperties()
 
 func activate(state: bool)-> void:
