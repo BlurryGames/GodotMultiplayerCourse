@@ -2,9 +2,9 @@ class_name PressurePlate extends Node2D
 
 signal toggle(state: bool)
 
-@export var isDown = false
 @export var plateUp: Sprite2D = null
 @export var plateDown: Sprite2D = null
+@export var isDown = false
 
 var bodiesOnPlate: int = 0
 

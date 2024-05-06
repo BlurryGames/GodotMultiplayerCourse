@@ -1,24 +1,23 @@
 class_name Player extends CharacterBody2D
 
-@export var playerCamera: PackedScene = null
-@export var cameraHeight: float = -132.0
+enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_JUMPING = 4, FALLING = 5 }
 
+@export var playerCamera: PackedScene = null
 @export var playerSprite: AnimatedSprite2D = null
 
+@onready var initialSpriteScale: Vector2 = playerSprite.scale
+
+@export var cameraHeight: float = -132.0
 @export var movementSpeed: float = 300.0
 @export var gravity: float = 30.0
 @export var jumpStrength: float = 600.0
 @export var maxJumps: int = 1
 
-@onready var initialSpriteScale: Vector2 = playerSprite.scale
-
+var cameraInstance: Camera2D = null
+var currentInteractable: Area2D = null
 var ownerID: int = 1
 var jumpCount: int = 0
-var cameraInstance: Camera2D = null
 var state: playerState = playerState.IDLE
-var currentInteractable: Area2D = null
-
-enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_JUMPING = 4, FALLING = 5 }
 
 func _enter_tree()-> void:
 	ownerID = name.to_int()
