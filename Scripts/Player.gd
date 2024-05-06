@@ -16,6 +16,7 @@ var ownerID: int = 1
 var jumpCount: int = 0
 var cameraInstance: Camera2D = null
 var state: playerState = playerState.IDLE
+var currentInteractable: Area2D = null
 
 enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_JUMPING = 4, FALLING = 5 }
 
@@ -47,6 +48,10 @@ func _physics_process(_delta: float)-> void:
 	velocity.x = horizontalInput * movementSpeed
 	velocity.y += gravity
 	
+	if Input.is_action_just_pressed("Interact"):
+		if currentInteractable:
+			currentInteractable.interact.rpc_id(1)
+	
 	handleMovementState()
 	
 	move_and_slide()
@@ -57,6 +62,13 @@ func _physics_process(_delta: float)-> void:
 func _on_animated_sprite_2d_animation_finished()-> void:
 	if state == playerState.JUMPING:
 		playerSprite.play("Jump")
+
+func _on_interaction_handler_area_entered(area: Area2D)-> void:
+	currentInteractable = area
+
+func _on_interaction_handler_area_exited(area: Area2D)-> void:
+	if currentInteractable == area:
+		currentInteractable = null
 
 func faceMovementDirection(horizontalInput: float)-> void:
 	if not is_zero_approx(horizontalInput):

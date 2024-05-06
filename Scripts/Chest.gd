@@ -7,10 +7,6 @@ class_name Chest extends Node2D
 func _on_multiplayer_synchronizer_delta_synchronized():
 	setChestProperties()
 
-func onTestInteract(state: bool)-> void:
-	if state:
-		onInteractableInteracted()
-
 func onInteractableInteracted()-> void:
 	if isLocked:
 		isLocked = false
