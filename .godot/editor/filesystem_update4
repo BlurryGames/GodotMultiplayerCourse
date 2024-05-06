@@ -15,3 +15,5 @@ res://Scripts/PressurePlate.gd
 res://Scripts/Key.gd
 res://Interactables/KeyDoor/KeyDoor.tscn
 res://Scripts/KeyDoor.gd
+res://Interactables/Bridge/Bridge.tscn
+res://Scripts/Bridge.gd

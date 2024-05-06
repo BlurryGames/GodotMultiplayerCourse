@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://i4w7cenijf7x"]
+[gd_scene load_steps=13 format=3 uid="uid://i4w7cenijf7x"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1_3a0je"]
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="1_rop41"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cche0uwmp7tab" path="res://Interactables/Door/Door.tscn" id="7_ub5fc"]
 [ext_resource type="PackedScene" uid="uid://dulf8gxrvu6st" path="res://Interactables/Chest/Chest.tscn" id="8_8rwno"]
 [ext_resource type="PackedScene" uid="uid://cn7kia260vgxb" path="res://Interactables/KeyDoor/KeyDoor.tscn" id="9_qkjip"]
+[ext_resource type="PackedScene" uid="uid://no1agibjbn0p" path="res://Interactables/Bridge/Bridge.tscn" id="10_lk5mp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cxdhn"]
 texture = ExtResource("1_rop41")
@@ -127,6 +128,9 @@ position = Vector2(1149, -197)
 [node name="BridgePlate2" parent="---- Interactables ----" instance=ExtResource("6_jg5ar")]
 position = Vector2(1295, -197)
 
+[node name="Bridge" parent="---- Interactables ----" instance=ExtResource("10_lk5mp")]
+position = Vector2(1608, -153)
+
 [node name="---- Players ----" type="Node" parent="."]
 
 [node name="PlayersContainer" type="Node2D" parent="---- Players ----"]
@@ -143,3 +147,5 @@ position = Vector2(93, 113)
 position = Vector2(268, 118)
 
 [connection signal="toggle" from="---- Interactables ----/DoorPlate" to="---- Interactables ----/Door" method="activate"]
+[connection signal="toggle" from="---- Interactables ----/BridgePlate1" to="---- Interactables ----/Bridge" method="activate"]
+[connection signal="toggle" from="---- Interactables ----/BridgePlate2" to="---- Interactables ----/Bridge" method="activate"]
