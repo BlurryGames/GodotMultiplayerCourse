@@ -12,6 +12,10 @@ func _ready()-> void:
 	multiplayer.connection_failed.connect(onConnectionFailed)
 	multiplayer.connected_to_server.connect(onConnectedToServer)
 
+@rpc("call_local", "authority", "reliable")
+func hideMenu()-> void:
+	ui.hide()
+
 func _on_host_button_pressed()-> void:
 	notConnectedHBox.hide()
 	hostHBox.show()
@@ -30,8 +34,12 @@ func _on_start_button_pressed()-> void:
 func changeLevel(scene: PackedScene)-> void:
 	for c in levelContainer.get_children():
 		levelContainer.remove_child(c)
+		c.levelComplete.disconnect(onLevelComplete)
 		c.queue_free()
-	levelContainer.add_child(scene.instantiate())
+	
+	var newLevel = scene.instantiate()
+	levelContainer.add_child(newLevel)
+	newLevel.levelComplete.connect(onLevelComplete)
 
 func onConnectionFailed()-> void:
 	statusLabel.text = "Failed to connect"
@@ -40,6 +48,5 @@ func onConnectionFailed()-> void:
 func onConnectedToServer()-> void:
 	statusLabel.text = "Connected!"
 
-@rpc("call_local", "authority", "reliable")
-func hideMenu()-> void:
-	ui.hide()
+func onLevelComplete()-> void:
+	call_deferred("changeLevel", levelScene)

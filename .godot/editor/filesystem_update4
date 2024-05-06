@@ -27,3 +27,4 @@ res://Player/Knight/Knight.tscn
 res://Player/Knight/Knight.tres
 res://Scripts/Level.gd
 res://Player/Elf/Elf.tres
+res://Scripts/Menu.gd

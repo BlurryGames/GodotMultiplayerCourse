@@ -104,7 +104,7 @@ func faceMovementDirection(horizontalInput: float)-> void:
 func setUpCamera()-> void:
 	cameraInstance = playerCamera.instantiate()
 	cameraInstance.global_position.y = cameraHeight
-	get_tree().current_scene.add_child.call_deferred(cameraInstance)
+	get_parent().add_child.call_deferred(cameraInstance)
 
 func updateCameraPosition()-> void:
 	cameraInstance.global_position.x = global_position.x
