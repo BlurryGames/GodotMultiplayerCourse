@@ -12,6 +12,7 @@ enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_
 @export var gravity: float = 30.0
 @export var jumpStrength: float = 600.0
 @export var maxJumps: int = 1
+@export var pushForce: float = 10.0
 
 var cameraInstance: Camera2D = null
 var currentInteractable: Area2D = null
@@ -54,6 +55,14 @@ func _physics_process(_delta: float)-> void:
 	handleMovementState()
 	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision: KinematicCollision2D = get_slide_collision(i)
+		var pushable: PushableObject = collision.get_collider() as PushableObject
+		if not pushable:
+			continue
+		
+		pushable.push(-collision.get_normal() * pushForce, collision.get_position())
 	
 	faceMovementDirection(horizontalInput)
 
