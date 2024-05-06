@@ -6,6 +6,9 @@ class_name Key extends Node2D
 var followingBody: CharacterBody2D = null
 
 func _process(delta: float)-> void:
+	if not multiplayer.multiplayer_peer:
+		return
+	
 	if multiplayer.is_server():
 		if followingBody:
 			global_position = lerp(
