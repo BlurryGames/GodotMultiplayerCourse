@@ -1,0 +1,1 @@
+class_name PushableObject extends RigidBody2D

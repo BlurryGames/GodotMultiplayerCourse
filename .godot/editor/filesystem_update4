@@ -17,3 +17,5 @@ res://Interactables/KeyDoor/KeyDoor.tscn
 res://Scripts/KeyDoor.gd
 res://Interactables/Bridge/Bridge.tscn
 res://Scripts/Bridge.gd
+res://Scripts/PushableObject.gd
+res://Interactables/PushableObject/PushableCrate.tscn
