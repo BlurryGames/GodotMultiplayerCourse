@@ -19,3 +19,5 @@ res://Interactables/Bridge/Bridge.tscn
 res://Scripts/Bridge.gd
 res://Scripts/PushableObject.gd
 res://Interactables/PushableObject/PushableCrate.tscn
+res://Player/PlayerFinder.tscn
+res://Scripts/PlayerFinder.gd

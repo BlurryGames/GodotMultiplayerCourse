@@ -27,6 +27,7 @@ window/size/resizable=false
 
 folder_colors={
 "res://Interactables/": "blue",
+"res://Player/": "yellow",
 "res://Scripts/": "gray",
 "res://art/": "pink",
 "res://art/backgrounds/": "green",

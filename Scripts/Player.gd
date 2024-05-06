@@ -4,6 +4,7 @@ enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_
 
 @export var playerCamera: PackedScene = null
 @export var playerSprite: AnimatedSprite2D = null
+@export var playerFinder: Node2D = null
 
 @onready var initialSpriteScale: Vector2 = playerSprite.scale
 
@@ -78,6 +79,12 @@ func _on_interaction_handler_area_entered(area: Area2D)-> void:
 func _on_interaction_handler_area_exited(area: Area2D)-> void:
 	if currentInteractable == area:
 		currentInteractable = null
+
+func _on_visible_on_screen_notifier_2d_screen_entered()-> void:
+	playerFinder.visible = false
+
+func _on_visible_on_screen_notifier_2d_screen_exited()-> void:
+	playerFinder.visible = true
 
 func faceMovementDirection(horizontalInput: float)-> void:
 	if not is_zero_approx(horizontalInput):
