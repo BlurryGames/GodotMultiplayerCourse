@@ -13,3 +13,5 @@ res://Interactables/KeyDoor/Key.tscn
 res://Scripts/Door.gd
 res://Scripts/PressurePlate.gd
 res://Scripts/Key.gd
+res://Interactables/KeyDoor/KeyDoor.tscn
+res://Scripts/KeyDoor.gd
