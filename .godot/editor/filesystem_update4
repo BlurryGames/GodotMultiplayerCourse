@@ -22,3 +22,8 @@ res://Interactables/PushableObject/PushableCrate.tscn
 res://Player/PlayerFinder.tscn
 res://Scripts/PlayerFinder.gd
 res://Scripts/HelperFunctions.gd
+res://Player/Elf/Elf.tscn
+res://Player/Knight/Knight.tscn
+res://Player/Knight/Knight.tres
+res://Scripts/Level.gd
+res://Player/Elf/Elf.tres

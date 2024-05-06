@@ -1,10 +1,11 @@
 class_name Level extends Node2D
 
-@export var playerScene: PackedScene = null
 @export var playersContainer: Node2D = null
+@export var playerScenes: Array[PackedScene] = []
 @export var spawnPoints: Array[Node2D] = []
 
 var nextSpawnPointIndex: int = 0
+var nextCharacterIndex: int = 0
 
 func _ready()-> void:
 	if not multiplayer.is_server():
@@ -27,7 +28,11 @@ func _exit_tree()-> void:
 	multiplayer.peer_disconnected.disconnect(deletePlayer)
 
 func addPlayer(id: int)-> void:
-	var playerInstance: CharacterBody2D = playerScene.instantiate()
+	var playerInstance: CharacterBody2D = playerScenes[nextCharacterIndex].instantiate()
+	nextCharacterIndex += 1
+	if nextCharacterIndex >= len(playerScenes):
+		nextCharacterIndex = 0
+	
 	playerInstance.position = getSpawnPoint()
 	playerInstance.name = str(id)
 	playersContainer.add_child(playerInstance)

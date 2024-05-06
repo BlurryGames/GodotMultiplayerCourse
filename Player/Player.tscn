@@ -335,7 +335,7 @@ shape = SubResource("RectangleShape2D_v7l27")
 position = Vector2(0, -30)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_pigcf")
-animation = &"DoubleJumpStart"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="InteractionHandler" type="Area2D" parent="AnimatedSprite2D"]
