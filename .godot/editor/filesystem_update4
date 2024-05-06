@@ -21,3 +21,4 @@ res://Scripts/PushableObject.gd
 res://Interactables/PushableObject/PushableCrate.tscn
 res://Player/PlayerFinder.tscn
 res://Scripts/PlayerFinder.gd
+res://Scripts/HelperFunctions.gd

@@ -6,7 +6,7 @@ enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_
 @export var playerSprite: AnimatedSprite2D = null
 @export var playerFinder: Node2D = null
 
-@onready var initialSpriteScale: Vector2 = playerSprite.scale
+@export var targetPosition: Vector2 = Vector2.INF
 
 @export var cameraHeight: float = -132.0
 @export var movementSpeed: float = 300.0
@@ -14,6 +14,8 @@ enum playerState { IDLE = 0, WALKING = 1, JUMP_STARTED = 2, JUMPING = 3, DOUBLE_
 @export var jumpStrength: float = 600.0
 @export var maxJumps: int = 1
 @export var pushForce: float = 10.0
+
+@onready var initialSpriteScale: Vector2 = playerSprite.scale
 
 var cameraInstance: Camera2D = null
 var currentInteractable: Area2D = null
@@ -29,11 +31,15 @@ func _enter_tree()-> void:
 	
 	setUpCamera()
 
-func _process(_delta)-> void:
+func _process(delta: float)-> void:
 	if not multiplayer.multiplayer_peer:
 		return
 	
 	if ownerID != multiplayer.get_unique_id():
+		global_position = HelperFunctions.clientInterpolate(
+			global_position,
+			targetPosition,
+			delta)
 		return
 	
 	updateCameraPosition()
@@ -56,6 +62,8 @@ func _physics_process(_delta: float)-> void:
 	handleMovementState()
 	
 	move_and_slide()
+	
+	targetPosition = global_position
 	
 	for i in get_slide_collision_count():
 		var collision: KinematicCollision2D = get_slide_collision(i)
