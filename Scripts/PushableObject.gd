@@ -24,4 +24,4 @@ func requestAuthority(id: int)-> void:
 func setPushableOwner(id: int)-> void:
 	requestedAuthority = false
 	set_multiplayer_authority(id)
-	freeze = multiplayer.get_unique_id() != id
+	set_deferred("freeze", multiplayer.get_unique_id() != id)

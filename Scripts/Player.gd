@@ -62,7 +62,8 @@ func _physics_process(_delta: float)-> void:
 		if not pushable:
 			continue
 		
-		pushable.push(-collision.get_normal() * pushForce, collision.get_position())
+		var point: Vector2 = collision.get_position() - pushable.global_position
+		pushable.push(-collision.get_normal() * pushForce, point)
 	
 	faceMovementDirection(horizontalInput)
 
